@@ -1,0 +1,34 @@
+import time 
+
+def main():
+    while True:
+        print("Game starts in 3 ")
+        time.sleep(3)  # waits three seconds before the game starts
+        gamez_piles = [6, 7, 8, 9, 10, 11]  # Initial piles
+        gamez_player = 1  # variable for the player's turn
+
+        while sum(gamez_piles) > 0:  # this is a loop to repeat the code until there are no more piles
+            print(f"Current piles: {gamez_piles}")  # displays the current state of the piles 
+            gamez_pile = int(input(f"Player {gamez_player}, choose a pile (1-{len(gamez_piles)}): ")) - 1  # prompt for pile selection
+            gamez_count = int(input("How many counters to remove: "))
+
+            # Validate the move
+            if 0 <= gamez_pile < len(gamez_piles) and 0 < gamez_count <= gamez_piles[gamez_pile]:  # input validation
+                gamez_piles[gamez_pile] -= gamez_count
+                # Switch player
+                gamez_player = 2 if gamez_player == 1 else 1  # update the current player
+            else:
+                print("Invalid move, try again.")  # handle invalid input
+
+        # Declare the winner (the player who did not just play)
+        winner = 2 if gamez_player == 1 else 1
+        print(f"Player {winner} wins!")  # announce the winner
+
+        # Ask the user if they want to restart the game
+        restart = input("Do you want to restart the game? (yes/no): ").strip().lower()
+        if restart != 'yes':
+            print("Thanks for playing!")
+            break  # exit the loop if the user does not want to restart
+
+if __name__ == "__main__":  # ensure the game runs properly
+    main()
